@@ -8,6 +8,7 @@ export default function Filter({ onFilterChange }) {
   function handleFilterChange (newFilter) {
     setFilter(newFilter);
     onFilterChange(newFilter); 
+    
   };
 
   return (
@@ -18,12 +19,14 @@ export default function Filter({ onFilterChange }) {
       >
         <Text style={styles.filterText}>Fazer</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={[styles.filterButon, styles.doneFilter]}
         onPress={() => handleFilterChange("done")}
       >
         <Text style={styles.filterText}>Concluidas</Text>
       </TouchableOpacity>
+      
     </View>
   );
 }

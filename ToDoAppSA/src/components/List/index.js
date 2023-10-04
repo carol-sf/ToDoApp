@@ -1,15 +1,21 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, View, RefreshControl } from "react-native";
 import styles from "./styles";
 import ItemList from "../ItemList";
+import React,{ useEffect,useState } from "react";
+import {loadData} from '../../RequisicoesFB/RequisicoesFB'
 
 export default function List(props) {
-  const { filter } = props;
+  useEffect(() => {
+    load();
+  }),[];
 
-  const data = [
-    {id: 1, done: true, description: "Passear com os cães" },
-    {id: 2, done: false, description: "Tomar banho" },
-    {id: 3, done: false, description: "Ir para a faculdade" }
-  ];
+  async function load(){
+    const data = await loadData(filter=='todo'?false:true);
+    setData(data);
+  }
+  const { filter } = props;
+  const [data, setData] = useState([]);
+ 
 
   function renderItem({ item }) {
     return <ItemList task={item} />;
@@ -17,7 +23,7 @@ export default function List(props) {
 
   return (
     <View>
-      { filter === 'todo' && <Text style={styles.listTitle}>Tarefas a fazer</Text> }
+      { filter === 'todo' && <Text style={styles.listTitle}>Tarefas a fazer</Text>}
       { filter === 'done' && <Text style={styles.listTitle}>Tarefas Concluidas</Text> }
       
       <FlatList 

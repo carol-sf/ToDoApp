@@ -1,4 +1,4 @@
-import { Keyboard, Pressable, Text, View } from "react-native";
+import { Keyboard, Pressable, Text, ScrollView } from "react-native";
 import styles from "./styles";
 import Form from "../../components/Form";
 import Filter from "../../components/Filter";

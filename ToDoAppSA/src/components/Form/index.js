@@ -1,7 +1,9 @@
-import { TextInput, TouchableOpacity, View } from "react-native";
+import { TextInput, TouchableOpacity,View, Alert} from "react-native";
 import styles from "./styles";
 import { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
+import{saveTask} from "../../RequisicoesFB/RequisicoesFB";
+
 
 export default function Form() {
   const [task, setTask] = useState("");
@@ -10,6 +12,16 @@ export default function Form() {
 
   function isTaskFilled() {
     return task !== "";
+  }
+
+  async function save() {
+      const resultado = await saveTask(task);
+      if(resultado === 'erro'){
+          Alert.alert("Erro", "Erro ao salvar tarefa");
+          return;
+      }
+      setTask("");
+
   }
 
   return (
@@ -23,6 +35,7 @@ export default function Form() {
       <TouchableOpacity
         style={[styles.button, sendButton]}
         disabled={!isTaskFilled}
+        onPress={() => save()}
       >
         <MaterialIcons name="send" size={24} color="white" />
       </TouchableOpacity>
