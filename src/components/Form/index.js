@@ -35,7 +35,7 @@ export default function Form() {
       <TouchableOpacity
         style={[styles.button, sendButton]}
         disabled={!isTaskFilled}
-        onPress={() => save()}
+        onPress={isTaskFilled()? () => save():null}
       >
         <MaterialIcons name="send" size={24} color="white" />
       </TouchableOpacity>
